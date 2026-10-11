@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ─── Core Surfaces ──────────────────────────────── */
+  --color-bg: #F7F7F5;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F2F2EF;
+  --color-surface-warm: #FAFAF8;
+
+  /* ─── Ink (Typography) ───────────────────────────── */
+  --color-ink: #0D0D0D;
+  --color-ink-secondary: #3D3D3D;
+  --color-muted: #8A8A8A;
+  --color-ghost: #C4C4C0;
+
+  /* ─── Groww Green Brand ──────────────────────────── */
+  --color-accent: #00D09C;
+  --color-accent-dark: #00BA88;
+  --color-accent-deeper: #008F69;
+  --color-accent-light: #E3FAF3;
+  --color-accent-faint: #F0FDF9;
+
+  /* ─── Semantic ───────────────────────────────────── */
+  --color-positive: #00D09C;
+  --color-caution: #E8334A;
+  --color-caution-light: #FFF0F2;
+  --color-warning: #F5A623;
+  --color-warning-light: #FFF7E6;
+
+  /* ─── Structural ─────────────────────────────────── */
+  --color-hairline: #E8E8E4;
+  --color-hairline-subtle: #EFEFEB;
+
+  /* ─── Typography ─────────────────────────────────── */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* ─── Deliberate radii (not uniform) ─────────────── */
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --radius-chip: 8px;
+  --radius-full: 9999px;
+}
+
+/* ─── Reset ────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ─── Tabular numerals ──────────────────────────────── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ─── Focus ring ────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ─── Safe area ─────────────────────────────────────── */
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+
+/* ─── Skeleton shimmer ──────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-subtle) 25%,
+    var(--color-hairline) 50%,
+    var(--color-surface-subtle) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* ─── Number input — hide spinner ───────────────────── */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ─── Option row (radio-style selectable row) ────────── */
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-hairline);
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.option-row:hover {
+  border-color: color-mix(in oklch, var(--color-accent) 40%, var(--color-hairline));
+}
+
+.option-row.selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-faint);
+}
+
+/* ─── Data table rows ────────────────────────────────── */
+.data-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--color-hairline-subtle);
+}
+
+.data-row:last-child { border-bottom: none; }
+
+/* ─── Section header label ───────────────────────────── */
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ─── Amount hero display ────────────────────────────── */
+.amount-hero {
+  font-size: clamp(34px, 10vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  color: var(--color-ink);
+}
+
+/* ─── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
